@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="summa-test-suite.xml" />
+	<munit:test name="summa-test-suite-summaFlowTest" doc:id="5e5d5a90-c3be-4bdc-9956-8f70b2476509" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to summaFlow" doc:id="41e210d3-2904-4651-8658-4fac53037bb1" name="summaFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="6d60f2dd-f000-4d89-ad70-030adf0ea688" actual="#[payload]" expected='#["Hello Dummy"]' message="#[&quot;Payload doesn't match with excepted&quot;]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="summa-test-suite-summaFlowTest1" doc:id="7b8fa9e9-c1c3-425c-aa29-6373b2933567" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to summaFlow" doc:id="2ee16f02-3d04-4cec-a8a1-228f93ff2417" name="summaFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="b12c1976-466b-4523-80de-eaff74d566e3" message="#[&quot;Payload doesn't start with Hello&quot;]" expression="#[payload]" is="#[MunitTools::startsWith('Hello')]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
